@@ -121,7 +121,8 @@ for name, clf in zip(name_cla, classifiers):
     mod.append(clf)
     tn1, fp1, fn1, tp1 = metrics.confusion_matrix(Y_test, prediction).ravel()
     new = {'name': name, 'tn':tn1, 'fp': fp1, 'fn': fn1, 'tp': tp1, 'test_error_rate': (fn1 + fp1)/(tn1+fp1 + fn1 + tp1), 'score': clf.score(X_test, Y_test)}
-    evalution_result = evalution_result.append(new, ignore_index = True)
+    new_df = pd.DataFrame([new])
+    evalution_result = pd.concat([evalution_result, new_df], ignore_index=True)
 
 th_props = [
   ('font-size', '20px'),
