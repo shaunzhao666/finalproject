@@ -113,7 +113,7 @@ X_train, X_test, Y_train, Y_test = train_test_split(X_df, Y_df, test_size=0.1, r
 
 
 mod = []
-eval = pd.DataFrame(columns=['name', 'tn', 'fp', 'fn', 'tp', 'test_error_rate', 'score'])
+evalution_resultution_resultution_resultution_result = pd.DataFrame(columns=['name', 'tn', 'fp', 'fn', 'tp', 'test_error_rate', 'score'])
 i = 0
 for name, clf in zip(name_cla, classifiers):
     clf.fit(X_train, Y_train)
@@ -121,7 +121,7 @@ for name, clf in zip(name_cla, classifiers):
     mod.append(clf)
     tn1, fp1, fn1, tp1 = metrics.confusion_matrix(Y_test, prediction).ravel()
     new = {'name': name, 'tn':tn1, 'fp': fp1, 'fn': fn1, 'tp': tp1, 'test_error_rate': (fn1 + fp1)/(tn1+fp1 + fn1 + tp1), 'score': clf.score(X_test, Y_test)}
-    eval = eval.append(new, ignore_index = True)
+    evalution_resultution_resultution_resultution_result = evalution_resultution_resultution_resultution_result.append(new, ignore_index = True)
 
 th_props = [
   ('font-size', '20px'),
@@ -260,14 +260,14 @@ elif select_page == 'ANALYSIS':
 elif select_page == 'MACHINE LEARNING':
     st.markdown("# MACHINE LEARNING")
     pre = st.container()
-    evaluation = st.container()
+    evalution_resultution_resultution_resultution_resultuation = st.container()
     ml = st.container()
     summ = st.container()
     with pre:
         st.markdown('### Preprocessing')
         st.image("https://raw.githubusercontent.com/shaunzhao666/finalproject/dataset/preprocess.png", width=900)
-    with evaluation:
-        st.markdown('### Evaluation for models')
+    with evalution_resultution_resultution_resultution_resultuation:
+        st.markdown('### evalution_resultution_resultution_resultution_resultuation for models')
         col1, col2 = st.columns(2)
         with col1: 
             st.markdown('#### Precision: ')
@@ -661,19 +661,19 @@ elif select_page == 'MACHINE LEARNING':
                                                         "Decision Tree": ["max_depth=10", "0.1"], \
                                                             "Logistic Regression": ["C=10", "0.1"]}, index=["hyperparameter", "test_size"]))
         st.markdown("<h2 style='text-align: center; color: gray;'> The results </h2>", unsafe_allow_html=True)
-        st.table(eval)
+        st.table(evalution_resultution_resultution_resultution_result)
         fig4 = plt.figure()
-        plt.barh(eval["name"], eval["score"])
+        plt.barh(evalution_resultution_resultution_resultution_result["name"], evalution_resultution_resultution_resultution_result["score"])
         plt.xlabel("Accuracy")
         plt.ylabel("Classification Method")
         plt.title("The comparision of accuracies among difference classification")
         st.pyplot(fig4)
 
         fig5, ax = plt.subplots()
-        ax.bar(eval["name"], eval["tp"], color='r', label="True Positive")
-        ax.bar(eval["name"], eval["tn"], color='b', label="True Negative", bottom=eval["tp"])
-        ax.bar(eval["name"], eval["fp"], color='g', label="False Pegative", bottom=eval["tp"]+eval["tn"])
-        ax.bar(eval["name"], eval["fn"], color='k', label="False Negative", bottom=eval["tp"]+eval["tn"]+eval["fp"])
+        ax.bar(evalution_resultution_resultution_resultution_result["name"], evalution_resultution_resultution_resultution_result["tp"], color='r', label="True Positive")
+        ax.bar(evalution_resultution_resultution_resultution_result["name"], evalution_resultution_resultution_resultution_result["tn"], color='b', label="True Negative", bottom=evalution_resultution_resultution_resultution_result["tp"])
+        ax.bar(evalution_resultution_resultution_resultution_result["name"], evalution_resultution_resultution_resultution_result["fp"], color='g', label="False Pegative", bottom=evalution_resultution_resultution_resultution_result["tp"]+evalution_resultution_resultution_resultution_result["tn"])
+        ax.bar(evalution_resultution_resultution_resultution_result["name"], evalution_resultution_resultution_resultution_result["fn"], color='k', label="False Negative", bottom=evalution_resultution_resultution_resultution_result["tp"]+evalution_resultution_resultution_resultution_result["tn"]+evalution_resultution_resultution_resultution_result["fp"])
         ax.set_title("The result of test")
         ax.set_xlabel("Classification Method")
         ax.set_ylabel("num")
